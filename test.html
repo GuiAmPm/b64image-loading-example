@@ -1,8 +1,5 @@
 <body onload="init()">
     <script>
-        let filesToLoad = 0;
-        let fileLoaded = 0;
-
         function init() {
             let fileList = ["image0.js", "image1.js", "image2.js",
                 "image0.js", "image1.js", "image2.js",
@@ -15,7 +12,6 @@
 
             for (let file of fileList) {
                 loadScript(`./${file}`);
-                filesToLoad += 3;
             }
             setTimeout(function(){ alert("That's not blocking, so i can decode stuff on the background or use workers"); }, 1);
         }
@@ -39,13 +35,6 @@
             document.body.append(img);
 
             document.body.append(document.createElement('br'));
-
-            fileLoaded++;
-
-            if (fileLoaded === filesToLoad) {
-                debugger;
-                document.getElementById("spinner").remove();
-            }
         }
     </script>
 </body>
