@@ -1,0 +1,51 @@
+<body onload="init()">
+    <script>
+        let filesToLoad = 0;
+        let fileLoaded = 0;
+
+        function init() {
+            let fileList = ["image0.js", "image1.js", "image2.js",
+                "image0.js", "image1.js", "image2.js",
+                "image0.js", "image1.js", "image2.js",
+                "image0.js", "image1.js", "image2.js",
+                "image0.js", "image1.js", "image2.js",
+                "image0.js", "image1.js", "image2.js",
+                "image0.js", "image1.js", "image2.js",
+            ];
+
+            for (let file of fileList) {
+                loadScript(`./${file}`);
+                filesToLoad += 3;
+            }
+            setTimeout(function(){ alert("That's not blocking, so i can decode stuff on the background or use workers"); }, 1);
+        }
+
+        function loadScript(src) {
+            let script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            document.body.append(script);
+        }
+
+        function register(name, type, data) {
+
+            document.body.append(name);
+            document.body.append(document.createElement('br'));
+
+            let img = document.createElement('img');
+            img.width = 100;
+            img.heigh = 100;
+            img.src = `data:image/${type};base64,${data}`
+            document.body.append(img);
+
+            document.body.append(document.createElement('br'));
+
+            fileLoaded++;
+
+            if (fileLoaded === filesToLoad) {
+                debugger;
+                document.getElementById("spinner").remove();
+            }
+        }
+    </script>
+</body>
